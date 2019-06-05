@@ -16,7 +16,7 @@ final class Router {
     }
     
     func moveToDetailsViewController() {
-        
+        print("move to")
     }
 }
 

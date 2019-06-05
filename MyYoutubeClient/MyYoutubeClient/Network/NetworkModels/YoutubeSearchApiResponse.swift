@@ -7,11 +7,11 @@ struct YoutubeSearchApiResponse: Codable {
 
 struct Item: Codable {
     let id: Id?
+    let snippet: Snippet?
 }
 
 struct Id: Codable {
     let videoId: String?
-    let snippet: Snippet?
 }
 
 struct Snippet: Codable {

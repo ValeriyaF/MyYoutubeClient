@@ -2,13 +2,17 @@ import UIKit
 
 final class VideoSearchView: UIView {
     
+    internal var searchTextAppearHandler: ((_ text: String?) -> Void)?
+    internal var cellClickHandler: (() -> Void)?
+    internal var imageForCell: ((_ index: Int) -> Void)?
+    
     private let tableView = UITableView(frame: .zero)
+    
     private let searchTextField: UITextField = {
         let textfield = UITextField(frame: .zero)
         textfield.borderStyle = .roundedRect
         return textfield
     }()
-    
     private let searchButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setTitle("Search", for: .normal)
@@ -16,7 +20,15 @@ final class VideoSearchView: UIView {
         return button
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView(frame: .zero)
+        ai.color = .red
+        return ai
+    }()
+    
     private let cellReuseID = "VideoSearchCell"
+    private var videoList: [Item] = []
+    private var currentImage: UIImage?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,24 +39,60 @@ final class VideoSearchView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureView() {
+    func startLoadVideoList() {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+    }
+    
+    func endLoadVideoLest() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+    }
+    
+    func updateSearchResults(withNewResults data: YoutubeSearchApiResponse) {
+        videoList.removeAll()
+        videoList += data.items ?? []
+        tableView.reloadData()
+    }
+    
+    func setupImage(forCellIndex index: Int, image: UIImage?) {
+//        let indexPath = IndexPath(index: index)
+//        tableView.reloadRows(at: indexPath, with: .none)
+//        tableView.cellForRow(at: indexPath)
+//        cell.configureImage(image: image)
+    }
+
+}
+
+private extension VideoSearchView {
+    func configureView() {
         self.backgroundColor = .white
         self.addSubview(tableView)
         self.addSubview(searchTextField)
         self.addSubview(searchButton)
+        tableView.addSubview(activityIndicator)
+        
         tableView.register(VideoSearchCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.delegate = self
         tableView.dataSource = self
         
+        searchButton.addTarget(self, action: #selector(searchButtonClicked(_ :)), for: .touchUpInside)
+        
         setupConstraints()
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         let parent = safeAreaLayoutGuide
         
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        activityIndicator.centerXAnchor.constraint(equalTo: parent.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 10.0).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 10.0).isActive = true
         
         searchTextField.topAnchor.constraint(equalTo: parent.topAnchor).isActive = true
         searchTextField.widthAnchor.constraint(equalTo: parent.widthAnchor, multiplier: 4.0 / 6.0).isActive = true
@@ -61,25 +109,33 @@ final class VideoSearchView: UIView {
         tableView.bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
     }
+    
+    @IBAction func searchButtonClicked(_ sender: UIButton) {
+        searchTextAppearHandler?(searchTextField.text)
+    }
 }
 
 extension VideoSearchView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return videoList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseID, for: indexPath) as! VideoSearchCell
+        cell.configureLabels(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet))
+        imageForCell?(indexPath.row)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ViewConstants.videoSearchCellTableViewHeightForRow
     }
+    
 }
 
 extension VideoSearchView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        cellClickHandler?()
     }
 }
