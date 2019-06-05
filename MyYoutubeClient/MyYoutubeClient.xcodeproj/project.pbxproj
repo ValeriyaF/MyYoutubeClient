@@ -14,6 +14,9 @@
 		3A0BA46622A7923400BEA770 /* VideoSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0BA46522A7923400BEA770 /* VideoSearchView.swift */; };
 		3A0BA46822A7924100BEA770 /* VideoSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0BA46722A7924100BEA770 /* VideoSearchModel.swift */; };
 		3A0BA46E22A7956000BEA770 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0BA46D22A7956000BEA770 /* Router.swift */; };
+		3A835EE222A7A9BD00D1B59D /* VideoSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835EE122A7A9BD00D1B59D /* VideoSearchCell.swift */; };
+		3A835EE422A7AD7500D1B59D /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835EE322A7AD7500D1B59D /* ViewConstants.swift */; };
+		3A835EE822A7EADA00D1B59D /* YoutubeSearchApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A835EE722A7EADA00D1B59D /* YoutubeSearchApiResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		3A0BA46722A7924100BEA770 /* VideoSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSearchModel.swift; sourceTree = "<group>"; };
 		3A0BA46D22A7956000BEA770 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		3A0BA47022A79A0F00BEA770 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3A835EE122A7A9BD00D1B59D /* VideoSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSearchCell.swift; sourceTree = "<group>"; };
+		3A835EE322A7AD7500D1B59D /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
+		3A835EE722A7EADA00D1B59D /* YoutubeSearchApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchApiResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,7 @@
 		3A0BA44D22A78E9800BEA770 /* MyYoutubeClient */ = {
 			isa = PBXGroup;
 			children = (
+				3A835EE522A7E8B200D1B59D /* Network */,
 				3A0BA46C22A7955400BEA770 /* Common */,
 				3A0BA46222A790E700BEA770 /* Utils */,
 				3A0BA46122A790D500BEA770 /* UserStories */,
@@ -91,6 +98,7 @@
 		3A0BA46222A790E700BEA770 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3A835EE322A7AD7500D1B59D /* ViewConstants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -98,6 +106,7 @@
 		3A0BA46322A791D300BEA770 /* VideoSearch */ = {
 			isa = PBXGroup;
 			children = (
+				3A835EE022A7A70000D1B59D /* Cell */,
 				3A0BA46A22A7925900BEA770 /* Model */,
 				3A0BA46B22A7926400BEA770 /* View */,
 				3A0BA46922A7924900BEA770 /* Controller */,
@@ -150,6 +159,30 @@
 				3A0BA47022A79A0F00BEA770 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A835EE022A7A70000D1B59D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3A835EE122A7A9BD00D1B59D /* VideoSearchCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3A835EE522A7E8B200D1B59D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3A835EE622A7E8B900D1B59D /* NetworkModels */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3A835EE622A7E8B900D1B59D /* NetworkModels */ = {
+			isa = PBXGroup;
+			children = (
+				3A835EE722A7EADA00D1B59D /* YoutubeSearchApiResponse.swift */,
+			);
+			path = NetworkModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,8 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0BA45122A78E9800BEA770 /* VideoSearchViewController.swift in Sources */,
+				3A835EE222A7A9BD00D1B59D /* VideoSearchCell.swift in Sources */,
+				3A835EE422A7AD7500D1B59D /* ViewConstants.swift in Sources */,
 				3A0BA44F22A78E9800BEA770 /* AppDelegate.swift in Sources */,
 				3A0BA46E22A7956000BEA770 /* Router.swift in Sources */,
+				3A835EE822A7EADA00D1B59D /* YoutubeSearchApiResponse.swift in Sources */,
 				3A0BA46622A7923400BEA770 /* VideoSearchView.swift in Sources */,
 				3A0BA46822A7924100BEA770 /* VideoSearchModel.swift in Sources */,
 			);

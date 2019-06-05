@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         router = Router(navigationController: navigationController)
-        
+        router?.showInitialViewController()
         return true
     }
 }

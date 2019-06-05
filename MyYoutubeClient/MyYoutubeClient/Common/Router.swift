@@ -6,6 +6,18 @@ final class Router {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    
+    func showInitialViewController() {
+        let firstVC = VideoSearchViewController()
+        firstVC.clichOnCellHandler = { [weak self] in
+            self?.moveToDetailsViewController()
+        }
+        self.navigationController.setViewControllers([firstVC], animated: false)
+    }
+    
+    func moveToDetailsViewController() {
+        
+    }
 }
 
 
