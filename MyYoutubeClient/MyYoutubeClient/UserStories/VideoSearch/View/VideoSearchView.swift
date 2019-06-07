@@ -65,6 +65,7 @@ private extension VideoSearchView {
         self.addSubview(searchButton)
         tableView.addSubview(activityIndicator)
         
+        tableView.separatorStyle = .none
         tableView.register(VideoSearchCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.delegate = self
         tableView.dataSource = self

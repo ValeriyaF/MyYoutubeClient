@@ -20,15 +20,18 @@ struct VideoDetailsDataToShare {
 final class VideoDetailsViewController: UIViewController {
     
     var sharedData: VideoDetailsDataToShare = VideoDetailsDataToShare()
-    private let detailView = VideoDetailsView()
-    private let model = VideoDetailsService()
+    var detailView: VideoDetailsView!
+    var model: VideoDetailsService!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = detailView
-        detailView.configureVideo(with: sharedData)
-        model.getVideoInfo(forVideo: sharedData.videoId) { (data, error) in
-            print(error ?? "")
+        detailView.configureVideoInfo(with: sharedData)
+        model.getVideoInfo(forVideo: sharedData.videoId) { [weak self] (data, error) in
+            var tags: [String] = []
+            data.items.compactMap { $0?.snippet?.tags }.forEach { tags += $0 }
+            self?.detailView.configureTagsLabel(with: tags)
+
         }
     }
 }

@@ -8,15 +8,19 @@ final class Router {
     }
     
     func showInitialViewController() {
-        let firstVC = VideoSearchViewController()
-        firstVC.clichOnCellHandler = { [weak self] item in
+        let initialVC = VideoSearchViewController()
+        initialVC.model = VideoSearchService()
+        initialVC.mainView = VideoSearchView()
+        initialVC.clichOnCellHandler = { [weak self] item in
             self?.moveToDetailsViewController(withDataToShare: item)
         }
-        self.navigationController.setViewControllers([firstVC], animated: false)
+        self.navigationController.setViewControllers([initialVC], animated: false)
     }
     
     func moveToDetailsViewController(withDataToShare data: VideoDetailsDataToShare) {
         var detailsViewController = VideoDetailsViewController()
+        detailsViewController.detailView = VideoDetailsView()
+        detailsViewController.model = VideoDetailsService()
         passDataToDetailsViewController(source: data, destination: &detailsViewController)
         self.navigationController.pushViewController(detailsViewController, animated: true)
     }

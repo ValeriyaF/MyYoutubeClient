@@ -4,8 +4,8 @@ final class VideoSearchViewController: UIViewController {
     
     internal var clichOnCellHandler: ((_ item: VideoDetailsDataToShare) -> Void)?
     
-    private let model = VideoSearchService()
-    private let mainView = VideoSearchView()
+    var model: VideoSearchService!
+    var mainView:VideoSearchView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +21,18 @@ final class VideoSearchViewController: UIViewController {
             }
             if text != "" {
                 self?.mainView.startLoadVideoList()
-                self?.model.getSearchResults(withQueryTerm: text) { data, error in
+                NetworkManager().getSearchResults(withQueryTerm: text, completion: { (data, error) in
+                    guard let data = data else {
+                        print(error)
+                        return
+                    }
                     self?.mainView.updateSearchResults(withNewResults: data)
                     self?.mainView.endLoadVideoLest()
-                }
+                })
+//                self?.model.getSearchResults(withQueryTerm: text) { data, error in
+//                    self?.mainView.updateSearchResults(withNewResults: data)
+//                    self?.mainView.endLoadVideoLest()
+//                }
             }
         }
         

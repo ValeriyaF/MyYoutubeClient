@@ -40,7 +40,7 @@ final class VideoSearchCell: UITableViewCell {
     
     func configureImage(image: UIImage?) {
         thumbnailImage.image = image
-        print(image)
+
     }
     
 }
@@ -55,18 +55,19 @@ private extension VideoSearchCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        thumbnailImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 4.0 / 5.0).isActive = true
+        thumbnailImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 14.0 / 15.0).isActive = true
         thumbnailImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.0 / 3.0).isActive = true
         thumbnailImage.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2.0 / 3.0).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1.0 / 5.0).isActive = true
+        titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 4.0 / 15.0).isActive = true
         titleLabel.topAnchor.constraint(equalTo: thumbnailImage.topAnchor).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         
         descriptionLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 2.0 / 3.0).isActive = true
-        descriptionLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 3.0 / 5.0).isActive = true
+        descriptionLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 10.0 / 15.0).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         descriptionLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
+    
 }
