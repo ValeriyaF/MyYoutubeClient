@@ -1,7 +1,7 @@
 import Foundation
 
 enum YoutubeApi {
-    case search(word: String)
+    case search(word: String, nextPage: String)
     case videoDetail(videoId: String)
 }
 
@@ -18,7 +18,7 @@ extension YoutubeApi: EndPointType {
         case .search:
             return "search"
         case .videoDetail:
-            return "videos?part=id,snippet"
+            return "videos"
         }
     }
     
@@ -28,18 +28,21 @@ extension YoutubeApi: EndPointType {
     
     var task: HTTPTask {
         switch self {
-        case .search(let word):
+        case .search(let word, let nextPage):
             return .requestParameters(bodyParameters: nil,
                                       bodyEncoding: .urlEncoding,
-                                      urlParameters: ["part":"snippet",
-                                                      "maxResults":"25",
-                                                      "q":word,
-                                                      "type":"video",
+                                      urlParameters: ["part": "snippet",
+                                                      "maxResults": "25",
+                                                      "q": word,
+                                                      "type": "video",
+                                                      "pageToken": nextPage,
                                                       "key": NetworkManager.api_key])
-        default:
+        case .videoDetail(let videoId):
             return .requestParameters(bodyParameters: nil,
                                       bodyEncoding: .urlEncoding,
-                                      urlParameters: ["token": "AppConfig.testToken"])
+                                      urlParameters: ["part": "id,snippet",
+                                                      "id": videoId,
+                                                      "key": NetworkManager.api_key])
         }
     }
     

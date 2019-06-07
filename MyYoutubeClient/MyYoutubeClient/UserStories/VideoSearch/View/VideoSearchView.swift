@@ -2,8 +2,9 @@ import UIKit
 
 final class VideoSearchView: UIView {
     
-    internal var searchTextAppearHandler: ((_ text: String?) -> Void)?
-    internal var cellClickHandler: ((_ item: VideoDetailsDataToShare) -> Void)?
+    var searchTextAppearHandler: ((_ text: String?) -> Void)?
+    var cellClickHandler: ((_ item: VideoDetailsDataToShare) -> Void)?
+    var fetchNewPageHandler: (() -> Void)?
 //    internal var loadImageForCellHeandler: ((_ index: Int) -> Void)?
     
     private let tableView = UITableView(frame: .zero)
@@ -49,9 +50,15 @@ final class VideoSearchView: UIView {
         activityIndicator.isHidden = true
     }
     
-    func updateSearchResults(withNewResults data: YoutubeSearchApiResponse) {
+    func updateSearchResults(withNewResults data: YoutubeSearchResults) {
         videoList.removeAll()
-        videoList += data.items ?? []
+        videoList += data.items
+        tableView.reloadData()
+    }
+    
+    func fetchSearchResults(withNewResults data: YoutubeSearchResults) {
+        videoList += data.items
+        print(videoList.count)
         tableView.reloadData()
     }
 
@@ -69,6 +76,9 @@ private extension VideoSearchView {
         tableView.register(VideoSearchCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
+        
+        searchTextField.delegate = self
         
         searchButton.addTarget(self, action: #selector(searchButtonClicked(_ :)), for: .touchUpInside)
         
@@ -106,6 +116,17 @@ private extension VideoSearchView {
     
     @IBAction func searchButtonClicked(_ sender: UIButton) {
         searchTextAppearHandler?(searchTextField.text)
+        searchTextField.resignFirstResponder()
+    }
+    
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= videoList.count
+    }
+    
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
     }
 }
 
@@ -116,7 +137,11 @@ extension VideoSearchView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseID, for: indexPath) as! VideoSearchCell
-        cell.configureLabels(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet))
+        if isLoadingCell(for: indexPath) {
+//            cell.configure(with: .none)
+        } else {
+            cell.configureLabels(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet))
+        }
 //        self.loadImageForCellHeandler?(indexPath.row)
         return cell
     }
@@ -131,5 +156,28 @@ extension VideoSearchView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         cellClickHandler?(VideoDetailsDataToShare(model: videoList[indexPath.row]))
+    }
+    
+}
+
+extension VideoSearchView: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print("\(indexPaths.last?.last)   \(videoList.count)")
+        if indexPaths.last?.last == (videoList.count - 1) {
+            fetchNewPageHandler?()
+        }
+//        if indexPaths.contains(where: isLoadingCell) {
+//            fetchNewPageHandler?()
+////            viewModel.fetchModerators()
+//        }
+    }
+
+}
+
+extension VideoSearchView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextAppearHandler?(searchTextField.text)
+        searchTextField.resignFirstResponder()
+        return true
     }
 }

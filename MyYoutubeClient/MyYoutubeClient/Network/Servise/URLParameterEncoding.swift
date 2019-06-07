@@ -10,10 +10,12 @@ struct URLParameterEncoder: ParameterEncoder {
             
             urlComponents.queryItems = [URLQueryItem]()
             
-            for (key,value) in parameters {
-                let queryItem = URLQueryItem(name: key,
-                                             value: "\(value)")
-                urlComponents.queryItems?.append(queryItem)
+            for (key, value) in parameters {
+                if case Optional<Any>.some = value {
+                    let queryItem = URLQueryItem(name: key,
+                                                 value: "\(value)")
+                    urlComponents.queryItems?.append(queryItem)
+                }
             }
             urlRequest.url = urlComponents.url
         }

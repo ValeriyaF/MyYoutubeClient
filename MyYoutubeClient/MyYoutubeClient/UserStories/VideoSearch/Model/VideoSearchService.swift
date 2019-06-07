@@ -1,32 +1,19 @@
 import UIKit
 
 final class VideoSearchService {
-    private let api_key = "AIzaSyBMX0bQeTqFZKYbqNZN66-Kigx1Dsb6Tps" // network layer
+    private let networkManager = NetworkManager()
     private let cache = NSCache<NSString, UIImage>()
     private var imageUrls: [String] = []
     
-    func getSearchResults(withQueryTerm word: String, completion: @escaping (_ data: YoutubeSearchApiResponse, _ error: Error?) -> ()) {
-        var downloadedData: YoutubeSearchApiResponse?
-        guard let url = URL(string: "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=\(word)&type=video&key=\(api_key)") else {
-            print("url problem")
-            return
-        }
-        
-        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+    func getSearchResults(withQueryTerm word: String, nextPage: String, completion: @escaping (_ data: YoutubeSearchApiResponse?, _ error: String?) -> ()) {
+        networkManager.loadSearchResults(withQueryTerm: word, nextPage: nextPage) { [weak self] data, error in
             if let data = data {
-                do {
-                    downloadedData = try JSONDecoder().decode(YoutubeSearchApiResponse.self, from: data)
-                    self?.imageUrls = downloadedData?.items?.compactMap { $0.snippet?.thumbnails?.medium?.url } ?? []
-                } catch {
-                    print(error.localizedDescription)
-                }
+                self?.imageUrls = data.items.compactMap { $0?.snippet?.thumbnails?.medium?.url }
             }
-            
-            DispatchQueue.main.async {
-                completion(downloadedData!, error)
-            }
-        }.resume()
+            completion(data, error)
+        }
     }
+    
     
     func getImege(forIndex index: Int, completion: @escaping (_ image: UIImage?) -> ()) {
         guard let imageUrl = URL(string: imageUrls[index]) else {

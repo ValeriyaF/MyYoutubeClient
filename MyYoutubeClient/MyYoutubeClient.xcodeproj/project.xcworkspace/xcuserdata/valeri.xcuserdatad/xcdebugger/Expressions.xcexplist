@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #2 in closure #1 in VideoSearchService.getSearchResults(withQueryTerm:completion:):VideoSearchService.swift">
+         contextName = "VideoSearchView.isLoadingCell(for:):VideoSearchView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "imageUrls">
+               value = "videoList">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -23,6 +23,22 @@
          <PersistentStrings>
             <PersistentString
                value = "sharedData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in VideoSearchService.getSearchResults(withQueryTerm:completion:):VideoSearchService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageUrls">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "VideoSearchView.fetchSearchResults(withNewResults:):VideoSearchView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoList">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -48,7 +64,13 @@
             <PersistentString
                value = "image">
             </PersistentString>
+            <PersistentString
+               value = "nextPageToken">
+            </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "URLParameterEncoder.encode(urlRequest:with:):URLParameterEncoding.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

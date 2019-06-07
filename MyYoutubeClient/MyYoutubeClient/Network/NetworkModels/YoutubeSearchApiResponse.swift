@@ -2,7 +2,7 @@ import Foundation
 
 struct YoutubeSearchApiResponse: Codable {
     let nextPageToken: String?
-    let items: [Item]? // fix
+    let items: [Item?]
 }
 
 struct Item: Codable {
