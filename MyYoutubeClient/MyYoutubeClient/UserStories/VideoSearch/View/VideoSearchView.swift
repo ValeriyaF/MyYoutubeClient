@@ -3,8 +3,8 @@ import UIKit
 final class VideoSearchView: UIView {
     
     internal var searchTextAppearHandler: ((_ text: String?) -> Void)?
-    internal var cellClickHandler: (() -> Void)?
-    internal var imageForCell: ((_ index: Int) -> Void)?
+    internal var cellClickHandler: ((_ item: VideoDetailsDataToShare) -> Void)?
+//    internal var loadImageForCellHeandler: ((_ index: Int) -> Void)?
     
     private let tableView = UITableView(frame: .zero)
     
@@ -21,9 +21,9 @@ final class VideoSearchView: UIView {
     }()
     
     private let activityIndicator: UIActivityIndicatorView = {
-        let ai = UIActivityIndicatorView(frame: .zero)
-        ai.color = .red
-        return ai
+        let indicator = UIActivityIndicatorView(frame: .zero)
+        indicator.color = .red
+        return indicator
     }()
     
     private let cellReuseID = "VideoSearchCell"
@@ -53,13 +53,6 @@ final class VideoSearchView: UIView {
         videoList.removeAll()
         videoList += data.items ?? []
         tableView.reloadData()
-    }
-    
-    func setupImage(forCellIndex index: Int, image: UIImage?) {
-//        let indexPath = IndexPath(index: index)
-//        tableView.reloadRows(at: indexPath, with: .none)
-//        tableView.cellForRow(at: indexPath)
-//        cell.configureImage(image: image)
     }
 
 }
@@ -123,7 +116,7 @@ extension VideoSearchView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseID, for: indexPath) as! VideoSearchCell
         cell.configureLabels(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet))
-        imageForCell?(indexPath.row)
+//        self.loadImageForCellHeandler?(indexPath.row)
         return cell
     }
     
@@ -136,6 +129,6 @@ extension VideoSearchView: UITableViewDataSource {
 extension VideoSearchView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        cellClickHandler?()
+        cellClickHandler?(VideoDetailsDataToShare(model: videoList[indexPath.row]))
     }
 }

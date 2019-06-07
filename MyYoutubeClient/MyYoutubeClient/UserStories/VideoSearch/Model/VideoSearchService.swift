@@ -25,7 +25,7 @@ final class VideoSearchService {
             DispatchQueue.main.async {
                 completion(downloadedData!, error)
             }
-            }.resume()
+        }.resume()
     }
     
     func getImege(forIndex index: Int, completion: @escaping (_ image: UIImage?) -> ()) {

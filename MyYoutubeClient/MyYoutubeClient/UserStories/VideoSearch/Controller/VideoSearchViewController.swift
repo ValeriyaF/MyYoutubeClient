@@ -2,7 +2,7 @@ import UIKit
 
 final class VideoSearchViewController: UIViewController {
     
-    var clichOnCellHandler: (() -> Void)?
+    internal var clichOnCellHandler: ((_ item: VideoDetailsDataToShare) -> Void)?
     
     private let model = VideoSearchService()
     private let mainView = VideoSearchView()
@@ -11,7 +11,9 @@ final class VideoSearchViewController: UIViewController {
         super.viewDidLoad()
         self.view = mainView
         
-        mainView.cellClickHandler = { [weak self] in self?.clichOnCellHandler?() }
+        mainView.cellClickHandler = { [weak self] item in
+            self?.clichOnCellHandler?(item)
+        }
         
         mainView.searchTextAppearHandler = { [weak self] text in
             guard let text = text else {
@@ -26,11 +28,12 @@ final class VideoSearchViewController: UIViewController {
             }
         }
         
-        mainView.imageForCell = { index in
-            self.model.getImege(forIndex: index, completion: { image in
-                self.mainView.setupImage(forCellIndex: index, image: image)
-            })
-        }
+//        mainView.loadImageForCellHeandler = { index in
+//            self.model.getImege(forIndex: index, completion: { image in
+////                self.mainView.setupImage(forCellIndex: index, image: image)
+//            })
+//
+//        }
         
 
         

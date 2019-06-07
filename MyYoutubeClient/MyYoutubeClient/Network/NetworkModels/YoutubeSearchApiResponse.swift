@@ -2,7 +2,7 @@ import Foundation
 
 struct YoutubeSearchApiResponse: Codable {
     let nextPageToken: String?
-    let items: [Item]?
+    let items: [Item]? // fix
 }
 
 struct Item: Codable {
@@ -15,6 +15,8 @@ struct Id: Codable {
 }
 
 struct Snippet: Codable {
+    let publishedAt: String?
+    let channelTitle: String?
     let title: String?
     let description: String?
     let thumbnails: Thumbnails?

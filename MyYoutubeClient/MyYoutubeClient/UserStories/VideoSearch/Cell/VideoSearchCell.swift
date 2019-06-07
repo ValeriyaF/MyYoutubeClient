@@ -19,7 +19,7 @@ final class VideoSearchCell: UITableViewCell {
         let lbl = UILabel(frame: .zero)
         lbl.backgroundColor = .yellow
         lbl.textAlignment = .left
-        lbl.numberOfLines = 4
+        lbl.numberOfLines = 0
         lbl.adjustsFontSizeToFitWidth = true
         return lbl
     }()
@@ -40,7 +40,7 @@ final class VideoSearchCell: UITableViewCell {
     
     func configureImage(image: UIImage?) {
         thumbnailImage.image = image
-        thumbnailImage.backgroundColor = .gray
+        print(image)
     }
     
 }

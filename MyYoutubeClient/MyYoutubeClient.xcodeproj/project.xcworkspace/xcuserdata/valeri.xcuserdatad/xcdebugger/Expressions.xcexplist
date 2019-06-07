@@ -11,10 +11,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "VideoSearchView.updateSearchResults(withNewResults:):VideoSearchView.swift">
+         contextName = "VideoDetailsView.configureVideo(with:):VideoDetailsView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "videoList">
+               value = "model.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in VideoDetailsViewController.viewDidLoad():VideoDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sharedData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -23,6 +31,22 @@
          <PersistentStrings>
             <PersistentString
                value = "videoList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "VideoSearchView.updateSearchResults(withNewResults:):VideoSearchView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in VideoSearchViewController.viewDidLoad():VideoSearchViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "image">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
