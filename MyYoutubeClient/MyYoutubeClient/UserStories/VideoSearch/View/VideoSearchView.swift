@@ -54,6 +54,7 @@ final class VideoSearchView: UIView {
         videoList.removeAll()
         videoList += data.items
         tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     func fetchSearchResults(withNewResults data: YoutubeSearchResults) {
@@ -137,11 +138,7 @@ extension VideoSearchView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseID, for: indexPath) as! VideoSearchCell
-        if isLoadingCell(for: indexPath) {
-//            cell.configure(with: .none)
-        } else {
-            cell.configureLabels(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet))
-        }
+        cell.configureLabels(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet), forIndex: indexPath.row)
 //        self.loadImageForCellHeandler?(indexPath.row)
         return cell
     }
@@ -162,14 +159,9 @@ extension VideoSearchView: UITableViewDelegate {
 
 extension VideoSearchView: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print("\(indexPaths.last?.last)   \(videoList.count)")
         if indexPaths.last?.last == (videoList.count - 1) {
             fetchNewPageHandler?()
         }
-//        if indexPaths.contains(where: isLoadingCell) {
-//            fetchNewPageHandler?()
-////            viewModel.fetchModerators()
-//        }
     }
 
 }

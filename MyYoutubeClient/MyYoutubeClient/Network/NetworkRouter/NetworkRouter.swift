@@ -37,6 +37,9 @@ class NetworkRouter<EndPoint: EndPointType> {
                                              bodyEncoding: bodyEncoding,
                                              urlParameters: urlParameters,
                                              request: &request)
+            case .request(let url):
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.url = url
             }
             return request
         } catch {

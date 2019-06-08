@@ -9,7 +9,7 @@ final class Router {
     
     func showInitialViewController() {
         let initialVC = VideoSearchViewController()
-        initialVC.model = VideoSearchService()
+        initialVC.model = VideoSearchService(networkManager: NetworkManager())
         initialVC.mainView = VideoSearchView()
         initialVC.clichOnCellHandler = { [weak self] item in
             self?.moveToDetailsViewController(withDataToShare: item)

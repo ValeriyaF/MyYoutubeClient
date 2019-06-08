@@ -26,7 +26,6 @@
 		3AB79B2722AAA1D0000CD135 /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB79B2622AAA1D0000CD135 /* HTTPTask.swift */; };
 		3AB79B2922AAA201000CD135 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB79B2822AAA201000CD135 /* ParameterEncoding.swift */; };
 		3AB79B2B22AAA239000CD135 /* URLParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB79B2A22AAA239000CD135 /* URLParameterEncoding.swift */; };
-		3AB79B2D22AAA2B9000CD135 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB79B2C22AAA2B9000CD135 /* JSONParameterEncoder.swift */; };
 		3AB79B2F22AAA2E2000CD135 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB79B2E22AAA2E2000CD135 /* EndPointType.swift */; };
 		3AB79B3222AAA31B000CD135 /* YoutubeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB79B3122AAA31B000CD135 /* YoutubeEndPoint.swift */; };
 		3AB79B3522AAA63B000CD135 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB79B3422AAA63B000CD135 /* NetworkRouter.swift */; };
@@ -56,7 +55,6 @@
 		3AB79B2622AAA1D0000CD135 /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		3AB79B2822AAA201000CD135 /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		3AB79B2A22AAA239000CD135 /* URLParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoding.swift; sourceTree = "<group>"; };
-		3AB79B2C22AAA2B9000CD135 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
 		3AB79B2E22AAA2E2000CD135 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		3AB79B3122AAA31B000CD135 /* YoutubeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeEndPoint.swift; sourceTree = "<group>"; };
 		3AB79B3422AAA63B000CD135 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
@@ -245,7 +243,6 @@
 				3AB79B2622AAA1D0000CD135 /* HTTPTask.swift */,
 				3AB79B2822AAA201000CD135 /* ParameterEncoding.swift */,
 				3AB79B2A22AAA239000CD135 /* URLParameterEncoding.swift */,
-				3AB79B2C22AAA2B9000CD135 /* JSONParameterEncoder.swift */,
 				3AB79B2E22AAA2E2000CD135 /* EndPointType.swift */,
 			);
 			path = Servise;
@@ -354,7 +351,6 @@
 				3A0BA46E22A7956000BEA770 /* Router.swift in Sources */,
 				3AB79B3222AAA31B000CD135 /* YoutubeEndPoint.swift in Sources */,
 				3A1C8A3822A92D47004F0277 /* VideoDetailsViewController.swift in Sources */,
-				3AB79B2D22AAA2B9000CD135 /* JSONParameterEncoder.swift in Sources */,
 				3A835EE822A7EADA00D1B59D /* YoutubeSearchApiResponse.swift in Sources */,
 				3A0BA46622A7923400BEA770 /* VideoSearchView.swift in Sources */,
 				3A0BA46822A7924100BEA770 /* VideoSearchService.swift in Sources */,

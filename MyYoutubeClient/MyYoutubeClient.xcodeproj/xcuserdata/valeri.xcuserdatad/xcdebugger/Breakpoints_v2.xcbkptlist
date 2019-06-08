@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyYoutubeClient/Network/Servise/ParameterEncoding.swift"
-            timestampString = "581630907.666238"
+            filePath = "MyYoutubeClient/Network/NetworkManager.swift"
+            timestampString = "581683159.335299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "encode(urlRequest:bodyParameters:urlParameters:)"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "loadImage(fromURL:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyYoutubeClient/Network/Servise/ParameterEncoding.swift"
-            timestampString = "581630907.6663049"
+            filePath = "MyYoutubeClient/UserStories/VideoSearch/Model/VideoSearchService.swift"
+            timestampString = "581683159.335358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "encode(urlRequest:bodyParameters:urlParameters:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "getImege(forIndex:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyYoutubeClient/UserStories/VideoSearch/View/VideoSearchView.swift"
-            timestampString = "581630907.666355"
+            filePath = "MyYoutubeClient/UserStories/VideoSearch/Model/VideoSearchService.swift"
+            timestampString = "581683159.335412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "fetchSearchResults(withNewResults:)"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "getImege(forIndex:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyYoutubeClient/UserStories/VideoSearch/Controller/VideoSearchViewController.swift"
-            timestampString = "581630907.666908"
+            filePath = "MyYoutubeClient/UserStories/VideoSearch/Model/VideoSearchService.swift"
+            timestampString = "581683159.3354599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "getImege(forIndex:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,29 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyYoutubeClient/UserStories/VideoSearch/View/VideoSearchView.swift"
-            timestampString = "581630907.6670049"
+            filePath = "MyYoutubeClient/Network/NetworkRouter/NetworkRouter.swift"
+            timestampString = "581683159.3355089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "visibleIndexPathsToReload(intersecting:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyYoutubeClient/UserStories/VideoSearch/View/VideoSearchView.swift"
-            timestampString = "581630907.667888"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "tableView(_:prefetchRowsAt:)"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "request(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

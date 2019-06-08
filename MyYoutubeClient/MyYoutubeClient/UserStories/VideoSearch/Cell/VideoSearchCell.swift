@@ -1,23 +1,23 @@
 import UIKit
 
 final class VideoSearchCell: UITableViewCell {
+    // failed to add lazy loading :(
+    private let service = VideoSearchService(networkManager: NetworkManager())
     
     private let thumbnailImage: UIImageView = {
         let imgView = UIImageView(image: nil)
         imgView.layer.masksToBounds = true
-        imgView.backgroundColor = .red
+        imgView.backgroundColor = .lightGray
         return imgView
     }()
     private let titleLabel: UILabel = {
        let lbl = UILabel(frame: .zero)
-        lbl.backgroundColor = .green
         lbl.textAlignment = .left
         return lbl
     }()
     
     private let descriptionLabel: UILabel = {
         let lbl = UILabel(frame: .zero)
-        lbl.backgroundColor = .yellow
         lbl.textAlignment = .left
         lbl.numberOfLines = 0
         lbl.adjustsFontSizeToFitWidth = true
@@ -33,15 +33,14 @@ final class VideoSearchCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func configureLabels(with model: VideoSearchCellModel) {
+    func configureLabels(with model: VideoSearchCellModel, forIndex index: Int) {
         titleLabel.text = model.title
         descriptionLabel.text = model.description
+        service.getImege(forIndex: index) { [weak self] image in
+            self?.thumbnailImage.image = image
+        }
     }
-    
-    func configureImage(image: UIImage?) {
-        thumbnailImage.image = image
 
-    }
     
 }
 

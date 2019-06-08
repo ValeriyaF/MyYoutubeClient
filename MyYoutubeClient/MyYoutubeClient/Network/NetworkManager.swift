@@ -15,7 +15,7 @@ enum Result {
 }
 
 struct NetworkManager {
-    static let api_key = "AIzaSyDO6Jg0YJM7J09KBdZ6mqkpUqgFoZGYq_U"// "AIzaSyBMX0bQeTqFZKYbqNZN66-Kigx1Dsb6Tps"
+    static let api_key = "AIzaSyBr4KeXSznCnO8TB3gCK6kCSExWrnqnD6E" //"AIzaSyDO6Jg0YJM7J09KBdZ6mqkpUqgFoZGYq_U"
     let networkRouter = NetworkRouter<YoutubeApi>()
     
     func loadSearchResults(withQueryTerm word: String, nextPage: String, completion: @escaping (_ data: YoutubeSearchApiResponse?, _ error: String?) -> ()) {
@@ -77,6 +77,35 @@ struct NetworkManager {
                             completion(nil, NetworkErrors.unableToDecode.rawValue)
                         }
                     }
+                case .failure(let networkFailureError):
+                    DispatchQueue.main.async {
+                        completion(nil, networkFailureError)
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func loadImage(fromURL url: URL, completion: @escaping (_ data: Data?, _ error: String?) -> ()) {
+        networkRouter.request(.image(url: url)) { data, response, error in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        DispatchQueue.main.async {
+                            completion(nil, NetworkErrors.noData.rawValue)
+                        }
+                        return
+                    }
+                        DispatchQueue.main.async {
+                            completion(responseData, nil)
+                        }
                 case .failure(let networkFailureError):
                     DispatchQueue.main.async {
                         completion(nil, networkFailureError)

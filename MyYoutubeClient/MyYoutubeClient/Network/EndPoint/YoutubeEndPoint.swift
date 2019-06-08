@@ -3,6 +3,7 @@ import Foundation
 enum YoutubeApi {
     case search(word: String, nextPage: String)
     case videoDetail(videoId: String)
+    case image(url: URL)
 }
 
 extension YoutubeApi: EndPointType {
@@ -19,6 +20,8 @@ extension YoutubeApi: EndPointType {
             return "search"
         case .videoDetail:
             return "videos"
+        case .image:
+            return ""
         }
     }
     
@@ -43,6 +46,8 @@ extension YoutubeApi: EndPointType {
                                       urlParameters: ["part": "id,snippet",
                                                       "id": videoId,
                                                       "key": NetworkManager.api_key])
+        case .image(let url):
+            return .request(url: url)
         }
     }
     

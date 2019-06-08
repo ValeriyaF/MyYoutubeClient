@@ -3,7 +3,34 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "VideoSearchView.isLoadingCell(for:):VideoSearchView.swift">
+         contextName = "VideoSearchService.configureImageUrls(with:):VideoSearchService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageUrls">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in VideoDetailsViewController.viewDidLoad():VideoDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sharedData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "URLParameterEncoder.encode(urlRequest:with:):URLParameterEncoding.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in VideoSearchService.getSearchResults(withQueryTerm:nextPage:completion:):VideoSearchService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageURLs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "VideoSearchView.tableView(_:cellForRowAt:):VideoSearchView.swift">
          <PersistentStrings>
             <PersistentString
                value = "videoList">
@@ -19,42 +46,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in VideoDetailsViewController.viewDidLoad():VideoDetailsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sharedData">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in closure #1 in VideoSearchService.getSearchResults(withQueryTerm:completion:):VideoSearchService.swift">
+         contextName = "VideoSearchService.getImege(forIndex:completion:):VideoSearchService.swift">
          <PersistentStrings>
             <PersistentString
                value = "imageUrls">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "VideoSearchView.fetchSearchResults(withNewResults:):VideoSearchView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "videoList">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "VideoSearchView.tableView(_:cellForRowAt:):VideoSearchView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "videoList">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "VideoSearchView.updateSearchResults(withNewResults:):VideoSearchView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "videoList">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -70,7 +65,44 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "URLParameterEncoder.encode(urlRequest:with:):URLParameterEncoding.swift">
+         contextName = "VideoSearchView.fetchSearchResults(withNewResults:):VideoSearchView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in VideoSearchService.getSearchResults(withQueryTerm:nextPage:completion:):VideoSearchService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageURLs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in VideoSearchService.getSearchResults(withQueryTerm:completion:):VideoSearchService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageUrls">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "VideoSearchView.updateSearchResults(withNewResults:):VideoSearchView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "VideoSearchView.isLoadingCell(for:):VideoSearchView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "videoList">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

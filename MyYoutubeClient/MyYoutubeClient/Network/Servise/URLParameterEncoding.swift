@@ -21,7 +21,7 @@ struct URLParameterEncoder: ParameterEncoder {
         }
         
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-            urlRequest.setValue("MyYoutubeClient/json; charset=utf-8", forHTTPHeaderField: "Content-Type") // !!!!!!!!
+            urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
         
     }

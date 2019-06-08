@@ -36,7 +36,7 @@ final class VideoSearchViewController: UIViewController {
                 self.queryText = text
                 self.model.getSearchResults(withQueryTerm: self.queryText, nextPage: self.nextPageToken, completion: { data, error in
                     guard let data = data else {
-                        print(error)
+                        print(error) // show alert or smth
                         return
                     }
                     self.nextPageToken = data.nextPageToken ?? ""
@@ -51,18 +51,20 @@ final class VideoSearchViewController: UIViewController {
                 return
             }
             self.model.getSearchResults(withQueryTerm: self.queryText, nextPage: self.nextPageToken,
-                completion: { data, error in
-                    guard let data = data else {
-                        print(error)
-                        return
-                    }
-                    self.nextPageToken = data.nextPageToken ?? ""
-                    self.mainView.fetchSearchResults(withNewResults: YoutubeSearchResults(response: data))
-                
-                })
+                                        completion: { data, error in
+                                            guard let data = data else {
+                                                print(error)
+                                                return
+                                            }
+                                            self.nextPageToken = data.nextPageToken ?? ""
+                                            self.mainView.fetchSearchResults(withNewResults: YoutubeSearchResults(response: data))
+                                            
+            })
         }
         
     }
-
+    
 }
+
+
 
