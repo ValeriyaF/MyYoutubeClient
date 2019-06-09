@@ -1,9 +1,10 @@
 import UIKit
 
 final class VideoSearchService {
+    static var imageURLs: [String] = []
+    
     private let networkManager: NetworkManager?
     private let cache = NSCache<NSString, UIImage>()
-    static var imageURLs: [String] = []
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
@@ -26,7 +27,6 @@ final class VideoSearchService {
     
     func getImege(forIndex index: Int, completion: @escaping (_ image: UIImage?) -> ()) {
         guard let imageUrl = URL(string: VideoSearchService.imageURLs[index]) else {
-            print("url problem")
             return
         }
         

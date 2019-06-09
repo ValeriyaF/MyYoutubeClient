@@ -42,7 +42,6 @@ final class VideoSearchCell: UITableViewCell {
         }
     }
 
-    
 }
 
 private extension VideoSearchCell {

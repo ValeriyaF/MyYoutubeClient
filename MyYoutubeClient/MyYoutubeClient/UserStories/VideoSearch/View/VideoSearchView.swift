@@ -159,7 +159,7 @@ extension VideoSearchView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ViewConstants.videoSearchCellTableViewHeightForRow
+        return ViewConstants.videoSearchCellHeight
     }
     
 }

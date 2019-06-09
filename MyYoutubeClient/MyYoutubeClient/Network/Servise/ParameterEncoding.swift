@@ -11,8 +11,8 @@ enum ParameterEncoding {
     case urlEncoding
     
     func encode(urlRequest: inout URLRequest,
-                       bodyParameters: Parameters?,
-                       urlParameters: Parameters?) throws {
+                bodyParameters: Parameters?,
+                urlParameters: Parameters?) throws {
         do {
             switch self {
             case .urlEncoding:

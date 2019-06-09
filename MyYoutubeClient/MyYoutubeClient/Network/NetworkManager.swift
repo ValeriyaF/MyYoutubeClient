@@ -15,7 +15,7 @@ enum Result {
 }
 
 struct NetworkManager {
-    static let api_key = "AIzaSyBr4KeXSznCnO8TB3gCK6kCSExWrnqnD6E" //"AIzaSyDO6Jg0YJM7J09KBdZ6mqkpUqgFoZGYq_U"
+    static let api_key = "AIzaSyBr4KeXSznCnO8TB3gCK6kCSExWrnqnD6E"
     let networkRouter = NetworkRouter<YoutubeApi>()
     
     func loadSearchResults(withQueryTerm word: String, nextPage: String, completion: @escaping (_ data: YoutubeSearchApiResponse?, _ error: String?) -> ()) {
@@ -116,7 +116,10 @@ struct NetworkManager {
         
     }
     
-    private func handleNetworkResponse(_ response: HTTPURLResponse) -> Result {
+}
+
+private extension NetworkManager {
+    func handleNetworkResponse(_ response: HTTPURLResponse) -> Result {
         switch response.statusCode {
         case 200...299: return .success
         case 401...500: return .failure(NetworkErrors.authenticationError.rawValue)
@@ -125,6 +128,5 @@ struct NetworkManager {
         default: return .failure(NetworkErrors.failed.rawValue)
         }
     }
-    
 }
 

@@ -19,7 +19,10 @@ class NetworkRouter<EndPoint: EndPointType> {
         self.dataTask?.resume()
     }
     
-    private func buildRequest(from route: EndPoint) throws -> URLRequest {
+}
+
+private extension NetworkRouter {
+    func buildRequest(from route: EndPoint) throws -> URLRequest {
         var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: 20.0)
@@ -46,10 +49,10 @@ class NetworkRouter<EndPoint: EndPointType> {
         }
     }
     
-    private func configureParameters(bodyParameters: Parameters?,
-                                     bodyEncoding: ParameterEncoding,
-                                     urlParameters: Parameters?,
-                                     request: inout URLRequest) throws {
+    func configureParameters(bodyParameters: Parameters?,
+                             bodyEncoding: ParameterEncoding,
+                             urlParameters: Parameters?,
+                             request: inout URLRequest) throws {
         do {
             try bodyEncoding.encode(urlRequest: &request,
                                     bodyParameters: bodyParameters, urlParameters: urlParameters)
@@ -57,5 +60,6 @@ class NetworkRouter<EndPoint: EndPointType> {
             throw error
         }
     }
+    
 }
 

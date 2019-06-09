@@ -9,7 +9,7 @@ protocol IVideoDetailsView: UIView {
 final class VideoDetailsView: UIView, IVideoDetailsView {
     
     private let webView = WKWebView(frame: .zero)
-
+    
     private lazy var labelsStackView: UIStackView = {
         let sv = UIStackView(frame: .zero)
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -94,15 +94,15 @@ private extension VideoDetailsView {
         webView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        webView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 2.0 / 5.0).isActive = true
+        webView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: ViewConstants.webViewHeightMultiplierRelativeToCell).isActive = true
         webView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         webView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         webView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         
         activityIndicator.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
-        activityIndicator.heightAnchor.constraint(equalToConstant: 5.0).isActive = true
-        activityIndicator.widthAnchor.constraint(equalToConstant: 5.0).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: ViewConstants.activityIndicatorSize).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: ViewConstants.activityIndicatorSize).isActive = true
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
@@ -114,7 +114,7 @@ private extension VideoDetailsView {
         labelsStackView.translatesAutoresizingMaskIntoConstraints = false
         
         labelsStackView.topAnchor.constraint(equalTo: webView.bottomAnchor).isActive = true
-        labelsStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1.0 / 10.0).isActive = true
+        labelsStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: ViewConstants.labelsStackViewHeightMultiplierRelativeToSuperview).isActive = true
         labelsStackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
         labelsStackView.addArrangedSubview(titleLabel)
