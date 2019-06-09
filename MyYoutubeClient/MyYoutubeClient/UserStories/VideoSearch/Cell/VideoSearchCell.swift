@@ -33,9 +33,10 @@ final class VideoSearchCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func configureLabels(with model: VideoSearchCellModel, forIndex index: Int) {
+    func configure(with model: VideoSearchCellModel, forIndex index: Int) {
         titleLabel.text = model.title
         descriptionLabel.text = model.description
+        self.thumbnailImage.image = nil
         service.getImege(forIndex: index) { [weak self] image in
             self?.thumbnailImage.image = image
         }

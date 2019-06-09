@@ -1,14 +1,28 @@
 import UIKit
 
-final class VideoSearchView: UIView {
+protocol IVideoSearchView: UIView {
+    var searchTextAppearHandler: ((_ text: String?) -> Void)? { get set }
+    var cellClickHandler: ((_ item: VideoDetailsDataToShare) -> Void)? { get set }
+    var fetchNewPageHandler: (() -> Void)? { get set }
+    
+    func startLoadVideoList()
+    func endLoadVideoLest()
+    func updateSearchResults(withNewResults data: YoutubeSearchResults)
+    func fetchSearchResults(withNewResults data: YoutubeSearchResults)
+}
+
+final class VideoSearchView: UIView, IVideoSearchView {
     
     var searchTextAppearHandler: ((_ text: String?) -> Void)?
     var cellClickHandler: ((_ item: VideoDetailsDataToShare) -> Void)?
     var fetchNewPageHandler: (() -> Void)?
-//    internal var loadImageForCellHeandler: ((_ index: Int) -> Void)?
     
     private let tableView = UITableView(frame: .zero)
-    
+    lazy private var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControl.Event.valueChanged)
+        return refreshControl
+    }()
     private let searchTextField: UITextField = {
         let textfield = UITextField(frame: .zero)
         textfield.borderStyle = .roundedRect
@@ -28,12 +42,12 @@ final class VideoSearchView: UIView {
     }()
     
     private let cellReuseID = "VideoSearchCell"
+    private var actualSearchQuery: String?
     private var videoList: [Item] = []
-    private var currentImage: UIImage?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureView() // rename
+        configureSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,20 +67,20 @@ final class VideoSearchView: UIView {
     func updateSearchResults(withNewResults data: YoutubeSearchResults) {
         videoList.removeAll()
         videoList += data.items
+        tableView.refreshControl?.endRefreshing()
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     func fetchSearchResults(withNewResults data: YoutubeSearchResults) {
         videoList += data.items
-        print(videoList.count)
         tableView.reloadData()
     }
-
+    
 }
 
 private extension VideoSearchView {
-    func configureView() {
+    func configureSubviews() {
         self.backgroundColor = .white
         self.addSubview(tableView)
         self.addSubview(searchTextField)
@@ -75,6 +89,7 @@ private extension VideoSearchView {
         
         tableView.separatorStyle = .none
         tableView.register(VideoSearchCell.self, forCellReuseIdentifier: cellReuseID)
+        tableView.refreshControl = refreshControl
         tableView.delegate = self
         tableView.dataSource = self
         tableView.prefetchDataSource = self
@@ -115,13 +130,14 @@ private extension VideoSearchView {
         tableView.leftAnchor.constraint(equalTo: parent.leftAnchor).isActive = true
     }
     
-    @IBAction func searchButtonClicked(_ sender: UIButton) {
-        searchTextAppearHandler?(searchTextField.text)
-        searchTextField.resignFirstResponder()
+    @IBAction func handleRefresh(_ refreshControl: UIRefreshControl) {
+        searchTextAppearHandler?(actualSearchQuery)
     }
     
-    func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= videoList.count
+    @IBAction func searchButtonClicked(_ sender: UIButton) {
+        actualSearchQuery = searchTextField.text
+        searchTextAppearHandler?(actualSearchQuery)
+        searchTextField.resignFirstResponder()
     }
     
     func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
@@ -138,8 +154,7 @@ extension VideoSearchView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseID, for: indexPath) as! VideoSearchCell
-        cell.configureLabels(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet), forIndex: indexPath.row)
-//        self.loadImageForCellHeandler?(indexPath.row)
+        cell.configure(with: VideoSearchCellModel(snippet: videoList[indexPath.row].snippet), forIndex: indexPath.row)
         return cell
     }
     
@@ -163,7 +178,7 @@ extension VideoSearchView: UITableViewDataSourcePrefetching {
             fetchNewPageHandler?()
         }
     }
-
+    
 }
 
 extension VideoSearchView: UITextFieldDelegate {

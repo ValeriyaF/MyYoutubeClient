@@ -14,6 +14,7 @@ final class VideoSearchService {
             if let data = data {
                 if nextPage == "" {
                     VideoSearchService.imageURLs.removeAll()
+                    self?.cache.removeAllObjects()
                     VideoSearchService.imageURLs = data.items.compactMap { $0?.snippet?.thumbnails?.medium?.url }
                 } else {
                     VideoSearchService.imageURLs.append(contentsOf: data.items.compactMap { $0?.snippet?.thumbnails?.medium?.url })
@@ -46,28 +47,7 @@ final class VideoSearchService {
                 
                 completion(loadedImage)
             }
-//            loadImage(withUrl: imageUrl, completion: completion)
         }
     }
-    
-//    private func loadImage(withUrl url: URL, completion: @escaping (_ image: UIImage?) -> ()) {
-//        
-//        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-//            var loadedImage: UIImage?
-//            
-//            if let data = data {
-//                loadedImage = UIImage(data: data)
-//            }
-//            
-//            if let loadedImage = loadedImage {
-//                self?.cache.setObject(loadedImage, forKey: url.absoluteString as NSString)
-//            }
-//            
-//            DispatchQueue.main.async {
-//                completion(loadedImage)
-//            }
-//            
-//        }.resume()
-//    }
-    
+
 }

@@ -1,19 +1,26 @@
 import UIKit
 
-struct YoutubeSearchResults {
-    let items: [Item]
-    
-    init(response: YoutubeSearchApiResponse) {
-        self.items = response.items.compactMap { $0 }
-    }
-}
-
 final class VideoSearchViewController: UIViewController {
     
     var clichOnCellHandler: ((_ item: VideoDetailsDataToShare) -> Void)?
     
     var model: VideoSearchService!
-    var mainView:VideoSearchView!
+    var mainView: IVideoSearchView! {
+        didSet {
+            self.mainView.cellClickHandler = { [weak self] item in
+                self?.clichOnCellHandler?(item)
+            }
+            
+            self.mainView.searchTextAppearHandler = { text in
+                self.searchVideos(withQueryTerm: text)
+            }
+            
+            self.mainView.fetchNewPageHandler = {
+                self.fetchNewSearchResults()
+            }
+            
+        }
+    }
     
     private var nextPageToken: String = ""
     private var queryText: String = ""
@@ -21,49 +28,49 @@ final class VideoSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = mainView
-        
-        mainView.cellClickHandler = { [weak self] item in
-            self?.clichOnCellHandler?(item)
-        }
-        
-        mainView.searchTextAppearHandler = { text in
-            guard let text = text else {
-                return
-            }
-            if text != "" {
-                self.mainView.startLoadVideoList()
-                self.nextPageToken = ""
-                self.queryText = text
-                self.model.getSearchResults(withQueryTerm: self.queryText, nextPage: self.nextPageToken, completion: { data, error in
-                    guard let data = data else {
-                        print(error) // show alert or smth
-                        return
-                    }
-                    self.nextPageToken = data.nextPageToken ?? ""
-                    self.mainView.updateSearchResults(withNewResults: YoutubeSearchResults(response: data))
-                    self.mainView.endLoadVideoLest()
-                })
-            }
-        }
-        
-        mainView.fetchNewPageHandler = {
-            if self.nextPageToken == "" {
-                return
-            }
-            self.model.getSearchResults(withQueryTerm: self.queryText, nextPage: self.nextPageToken,
-                                        completion: { data, error in
-                                            guard let data = data else {
-                                                print(error)
-                                                return
-                                            }
-                                            self.nextPageToken = data.nextPageToken ?? ""
-                                            self.mainView.fetchSearchResults(withNewResults: YoutubeSearchResults(response: data))
-                                            
-            })
-        }
-        
     }
     
+}
+
+private extension VideoSearchViewController {
+    func searchVideos(withQueryTerm word: String?) {
+        guard let word = word else {
+            return
+        }
+        if word != "" {
+            self.mainView.startLoadVideoList()
+            self.nextPageToken = ""
+            self.queryText = word
+            self.model.getSearchResults(withQueryTerm: self.queryText, nextPage: self.nextPageToken) { data, error in
+                guard let data = data else {
+                    let alert = UIAlertController(title: "Sorry", message: error, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.self.present(alert, animated: true, completion: nil)
+                    
+                    self.mainView.endLoadVideoLest()
+                    return
+                }
+                self.nextPageToken = data.nextPageToken ?? ""
+                self.mainView.updateSearchResults(withNewResults: YoutubeSearchResults(response: data))
+                self.mainView.endLoadVideoLest()
+            }
+        }
+    }
+    
+    func fetchNewSearchResults() {
+        if self.nextPageToken == "" {
+            return
+        }
+        self.model.getSearchResults(withQueryTerm: self.queryText, nextPage: self.nextPageToken)
+        { data, error in
+            guard let data = data else {
+                return
+            }
+            self.nextPageToken = data.nextPageToken ?? ""
+            self.mainView.fetchSearchResults(withNewResults: YoutubeSearchResults(response: data))
+            
+        }
+    }
 }
 
 

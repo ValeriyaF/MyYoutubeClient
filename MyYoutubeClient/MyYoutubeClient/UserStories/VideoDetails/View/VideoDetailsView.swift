@@ -1,7 +1,12 @@
 import UIKit
 import WebKit
 
-final class VideoDetailsView: UIView {
+protocol IVideoDetailsView: UIView {
+    func configureVideoInfo(with model: VideoDetailsDataToShare)
+    func configureTagsLabel(with tags: [String])
+}
+
+final class VideoDetailsView: UIView, IVideoDetailsView {
     
     private let webView = WKWebView(frame: .zero)
 
@@ -9,7 +14,6 @@ final class VideoDetailsView: UIView {
         let sv = UIStackView(frame: .zero)
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.axis = .vertical
-//        sv.spacing = 15
         sv.distribution = .fillEqually
         return sv
     }()
