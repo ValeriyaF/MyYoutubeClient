@@ -15,7 +15,7 @@ enum Result {
 }
 
 struct NetworkManager {
-    static let api_key = "AIzaSyBr4KeXSznCnO8TB3gCK6kCSExWrnqnD6E"
+    static let api_key = ""
     let networkRouter = NetworkRouter<YoutubeApi>()
     
     func loadSearchResults(withQueryTerm word: String, nextPage: String, completion: @escaping (_ data: YoutubeSearchApiResponse?, _ error: String?) -> ()) {
